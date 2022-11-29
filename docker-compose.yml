@@ -3,15 +3,20 @@ version: '3'
 services:
   postgres:
     image: 'postgres:10'
-    container_name: 'postgres_licenseservice'
+    container_name: 'postgres'
     environment:
       - 'POSTGRES_USER=admin'
       - 'POSTGRES_PASSWORD=admin'
-      - 'POSTGRES_DB=licenseservice'
+      - 'POSTGRES_DB=licenseservices'
 
 
-  app:
-    build: License Service
+  licenseservice:
+    build: ./License Service
     container_name: 'app-licenseservice'
     ports:
       - 8080:8080
+  configurationserver:
+    build: ./Configuration Server/
+    container_name: 'app-config'
+    ports:
+      - 8180:8180
